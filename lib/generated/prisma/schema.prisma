@@ -1,0 +1,119 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Account {
+  id String @id @default(cuid())
+
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String?
+  access_token      String?
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String?
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+enum UserRole {
+  CUSTOMER
+  ADMIN
+  SERVICE_PROVIDER
+}
+
+model User {
+  id            String    @id @default(cuid())
+  image         String?
+  name          String
+  email         String    @unique
+  emailVerified DateTime?
+  role          UserRole  @default(CUSTOMER)
+  password      String?
+  branch        Branch?   @relation(fields: [branchId], references: [id])
+  branchId      String?
+  region        Region?   @relation(fields: [regionId], references: [id])
+  regionId      String?
+  accounts      Account[]
+  sessions      Session[]
+  isVerfied     Boolean   @default(false)
+  token         Int?
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+model Region {
+  id String @id @default(cuid())
+
+  name      String
+  code      String
+  branches  Branch[]
+  users     User[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Branch {
+  id String @id @default(cuid())
+
+  name     String
+  region   Region @relation(fields: [regionId], references: [id])
+  regionId String
+  staff    User[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id String @id @default(cuid())
+
+  name        String
+  description String
+  image       String
+  products    Product[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id String @id @default(cuid())
+
+  name       String
+  category   Category @relation(fields: [categoryId], references: [id])
+  categoryId String
+  price      Decimal
+  stock      Int
+  image      String
+  manual     String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
