@@ -32,7 +32,7 @@ export default function FeaturedSection() {
   ]
   return (
     <>
-      <section className="bg-[#121820] py-16">
+      <section className="bg-[#121820] max-w-7xl container mx-auto py-16">
         <div className="flex justify-center items-center mb-12">
           <h3 className="text-white text-3xl font-semibold">Featured Content</h3>
         </div>

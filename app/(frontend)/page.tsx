@@ -1,3 +1,4 @@
+import { fetchAllProducts } from '@/action/fetch'
 import CategoriesSection from '@/components/frontend/categories-section'
 import FeaturedSection from '@/components/frontend/featured-section'
 import Footer from '@/components/frontend/footer-section'
@@ -8,7 +9,9 @@ import OurLatestProducts from '@/components/frontend/our-latest-products'
 import TestingSection from '@/components/frontend/test-section'
 import React from 'react'
 
-export default function page() {
+export default async function page() {
+  const fetchedProducts = await fetchAllProducts()
+  console.log(fetchedProducts, "Products Have Arrived😒😒😒");
   // This is our simple object with all the information
 const heroData = {
   title: "Capital Markets Day 2025",
@@ -16,15 +19,14 @@ const heroData = {
     "Shell plc outlined to investors the next steps in its strategy to deliver more value with less emissions.",
   buttonText: "Read more",
   buttonLink: "#",
-  imagePath: "/W-1.jpg",
+  imagePath: "/factory-producing-co2-pollution.jpg",
 }
   return (
     <>
       <TestingSection heroData = {heroData}/>
-      {/* <HeroSection/> */}
       <FeaturedSection />
       <CategoriesSection />
-      <OurLatestProducts />
+      <OurLatestProducts fetchedProducts={fetchedProducts}/>
       <HelpSection />
     </>
   )

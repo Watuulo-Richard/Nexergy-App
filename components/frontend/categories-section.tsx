@@ -72,12 +72,15 @@ export default function CategoriesSection() {
     ]
     return (
       <>
-        <section className="py-16 max-w-[1440] mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="max-w-7xl container mx-auto flex justify-center pt-4">
+          <h3 className="text-red-600 text-3xl font-semibold">Total Energies Categories</h3>
+        </div>
+        <section className="py-12 max-w-7xl container mx-auto grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
           {productCategoriesArray.map((category, categoryIndex) => {
             return (
               <div
                 key={categoryIndex}
-                className="bg-gray-600 w-full rounded-lg p-6 shadow-lg relative overflow-hidden transition-all duration-300 hover:shadow-xl group"
+                className="bg-[#1a222c] w-full rounded-lg p-6 shadow-lg relative overflow-hidden transition-all duration-300 hover:shadow-xl group"
                 style={{
                   boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                 }}

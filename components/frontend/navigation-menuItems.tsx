@@ -2,9 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
-
 import { cn } from "@/lib/utils"
-// import { Icons } from "@/components/icons"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -58,7 +56,7 @@ export function NavigationMenuItems() {
     <NavigationMenu>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Who we are</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
@@ -68,24 +66,24 @@ export function NavigationMenuItems() {
                     href="/"
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
+                    <img src="/totalenergies_parc-eolien-sorbon-ardennes_2024.jpg" alt="" />
                     <div className="mb-2 mt-4 text-lg font-medium">
-                      shadcn/ui
+                      Products & Services
                     </div>
                     <p className="text-sm leading-tight text-muted-foreground">
-                      Beautifully designed components built with Radix UI and
-                      Tailwind CSS.
+                      TotalEnergies provides energy storage, natural gas, and low-carbon electricity, serving households, industries, and businesses.
                     </p>
                   </a>
                 </NavigationMenuLink>
               </li>
-              <ListItem href="/docs" title="Introduction">
-                Re-usable components built using Radix UI and Tailwind CSS.
+              <ListItem href="/docs" title="TotalEnergies in Uganda MS & EP">
+                In the Marketing & Services (MS) sector, TotalEnergies Uganda has been a trusted brand for over 70 years. It operates a nationwide network of modern service stations that provide high-quality fuels, lubricants, LPG, and car care services. TotalEnergies also supports local businesses with reliable energy solutions and has made significant strides in promoting road safety, customer satisfaction, and environmental stewardship.
               </ListItem>
               <ListItem href="/docs/installation" title="Installation">
-                How to install dependencies and structure your app.
+                Projects.
               </ListItem>
               <ListItem href="/docs/primitives/typography" title="Typography">
-                Styles for headings, paragraphs, lists...etc
+                Sustainability
               </ListItem>
             </ul>
           </NavigationMenuContent>

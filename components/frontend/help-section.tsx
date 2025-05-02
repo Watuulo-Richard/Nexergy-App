@@ -5,7 +5,7 @@ import { CreditCard, MapPin, Milestone } from 'lucide-react'
 export default function HelpSection() {
   return (
     <>
-        <section className='bg-[#1a222c] rounded-xl py-16 max-w-[1440] mx-auto'>
+        <section className='bg-[#1a222c] rounded-xl py-16 max-w-7xl container mx-auto mb-16'>
             <div className="flex justify-start">
               <h3 className="px-6 font-semibold text-2xl text-white">How Can We Help ?</h3>
             </div>

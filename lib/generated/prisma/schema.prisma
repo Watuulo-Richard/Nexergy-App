@@ -109,7 +109,7 @@ model Product {
   name       String
   category   Category @relation(fields: [categoryId], references: [id])
   categoryId String
-  price      Decimal
+  price      Float
   stock      Int
   image      String
   manual     String?

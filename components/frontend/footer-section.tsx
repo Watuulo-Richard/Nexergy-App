@@ -6,7 +6,7 @@ import { Instagram, Youtube, Facebook, Linkedin, Twitter, ArrowUp } from "lucide
 export default function Footer() {
   return (
     <footer className="bg-[#1a1f24] text-white">
-      <div className="container mx-auto px-4 py-12">
+      <div className="container py-16 max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1440] mx-auto">
           {/* Column 1 */}
           <div>
