@@ -8,9 +8,14 @@ body {
   overflow-x: hidden;
 }
 
+:root {
+  --font-Montserrat-Alternates: "Montserrat Alternates", sans-serif;
+}
+
 @layer base {
   body {
-    @apply bg-[#121820]
+    @apply bg-[#121820];
+    font-family: var(--font-Montserrat-Alternates);
   }
 }
 

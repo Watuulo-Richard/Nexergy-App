@@ -22,18 +22,15 @@ import {
   BarChart3,
   BellIcon,
   Building2,
-  CalendarDays,
-  CreditCard,
   FileText,
   Fuel,
-  GitBranch,
   HotelIcon,
   HousePlug,
   Landmark,
   LogOut,
   MapPinHouse,
+  Newspaper,
   Settings,
-  Users,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
@@ -48,6 +45,7 @@ import {
 
 const navigationItems = [
   { name: "Analytics", href: "/dashboard", icon: BarChart3 },
+  { name: "News", href: "/dashboard/news", icon: Newspaper },
   { name: "Product Categories", href: "dashboard/categories", icon: HotelIcon },
   { name: "Products", href: "/dashboard/products", icon: Landmark },
   { name: "Regions", href: "/dashboard/regions", icon: MapPinHouse },

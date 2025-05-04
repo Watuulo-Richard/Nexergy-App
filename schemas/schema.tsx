@@ -56,3 +56,9 @@ export const regionSchema = z.object({
     name:z.string().min(1, "Minimum 1 Character"),
     code:z.string().min(1, "Minimum 1 Character")
 })
+
+export const newsSchema = z.object({
+    title:z.string().min(1, "Minimum 1 Character"),
+    content:z.string().min(1, "Minimum 1 Character"),
+    // imageUrl?:string,
+  })

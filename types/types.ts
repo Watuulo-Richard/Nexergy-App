@@ -39,3 +39,9 @@ export type RegionTypes = {
   code:string;
   
 }
+
+export type NewsTypes = {
+  title:string;
+  content:string;
+  imageUrl?:string,
+}
