@@ -1,5 +1,5 @@
 // import { Category } from "@/lib/generated/prisma";
-import { Category, Product, Region } from "@/lib/generated/prisma";
+import { Category, News, Product, Region } from "@/lib/generated/prisma";
 import { baseUrl } from "@/types/types";
 
 const categoriesAPI = `${baseUrl}/api/v1/categoriesAPI`
@@ -37,6 +37,20 @@ export async function fetchAllRegions() {
         const fetchedRegions = await response.json()
         // console.log(fetchedRegions.data);
         return fetchedRegions.data as Region[]
+    } catch (error) {
+        console.log(error);
+        return []
+    }
+}
+
+const newsAPI = `${baseUrl}/api/v1/newsAPI`
+
+export async function fetchAllNews() {
+    try {
+        const response = await fetch(newsAPI)
+        const fetchedNews = await response.json()
+        console.log(fetchedNews.data)
+        return fetchedNews.data as News[]
     } catch (error) {
         console.log(error);
         return []

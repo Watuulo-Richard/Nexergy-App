@@ -1,4 +1,4 @@
-import { fetchAllProducts } from '@/action/fetch'
+import { fetchAllNews, fetchAllProducts } from '@/action/fetch'
 import CategoriesSection from '@/components/frontend/categories-section'
 import FeaturedSection from '@/components/frontend/featured-section'
 import HelpSection from '@/components/frontend/help-section'
@@ -8,7 +8,9 @@ import React from 'react'
 
 export default async function page() {
   const fetchedProducts = await fetchAllProducts()
-  console.log(fetchedProducts, "Products Have Arrived😒😒😒");
+  // console.log(fetchedProducts, "Products Have Arrived😒😒😒");
+  const fetchedNews = await fetchAllNews()
+  console.log(fetchedNews, "Products Have Arrived😄😄😄");
   // This is our simple object with all the information
 const heroData = {
   title: "Capital Markets Day 2025",
@@ -21,7 +23,7 @@ const heroData = {
   return (
     <>
       <TestingSection heroData = {heroData}/>
-      <FeaturedSection />
+      <FeaturedSection  fetchedNews={fetchedNews}/>
       <CategoriesSection />
       <OurLatestProducts fetchedProducts={fetchedProducts}/>
       <HelpSection />
