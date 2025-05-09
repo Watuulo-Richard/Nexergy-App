@@ -44,7 +44,6 @@ export async function fetchAllRegions() {
 }
 
 const newsAPI = `${baseUrl}/api/v1/newsAPI`
-
 export async function fetchAllNews() {
     try {
         const response = await fetch(newsAPI)
@@ -54,5 +53,18 @@ export async function fetchAllNews() {
     } catch (error) {
         console.log(error);
         return []
+    }
+}
+
+export async function fetchSingleNews(id:string) {
+    const singleNewsAPI = `${baseUrl}/api/v1/newsAPI/${id}`
+    try {
+        const response = await fetch(singleNewsAPI)
+        const fetchedSingleNews = await response.json()
+        console.log(fetchedSingleNews.data);
+        return fetchedSingleNews.data as News
+    } catch (error) {
+        console.log(error);
+        return null
     }
 }

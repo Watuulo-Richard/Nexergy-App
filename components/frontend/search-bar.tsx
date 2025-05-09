@@ -8,7 +8,7 @@ export default function SearchBar() {
       <div
         className="
         bg-black/80 
-        border-2 border-red-600 
+        border border-red-600 
         rounded-md px-3 py-1
         flex items-center justify-between
         focus:outline-none

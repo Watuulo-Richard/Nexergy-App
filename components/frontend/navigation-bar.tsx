@@ -14,7 +14,7 @@ export default function NavigationBar() {
   const {handleClear, productCartArray} = useProductState()
   return (
     <>
-      <nav className="fixed top-0 z-50 w-full px-8 border-b bg-[#121820] backdrop-blur">
+      <nav className="fixed top-0 z-50 w-full px-8 border-b border-slate-600 bg-[#121820] backdrop-blur">
         <div className="container mx-auto flex items-center justify-between h-16 md:h-20">
           <div className="flex items-center gap-x-2 md:gap-x-6">
             {/* Logo */}
