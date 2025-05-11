@@ -4,10 +4,10 @@ import React from 'react'
 
 export default async function page() {
   const fetchedRegions = await fetchAllRegions()
-  console.log(fetchedRegions, "Regions Fetched Successfully✅");
+  // console.log(fetchedRegions, "Regions Fetched Successfully✅");
   return (
     <>
-      <BranchesForm fetchedRegions={fetchedRegions}/>
+      <BranchesForm fetchedRegions={fetchedRegions} fetchedBranch={null}/>
     </>
   )
 }

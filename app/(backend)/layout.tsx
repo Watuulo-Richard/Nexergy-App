@@ -27,9 +27,11 @@ import {
   HotelIcon,
   HousePlug,
   Landmark,
+  ListTodo,
   LogOut,
   MapPinHouse,
   Newspaper,
+  ScanEye,
   Settings,
 } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
@@ -46,10 +48,15 @@ import {
 const navigationItems = [
   { name: "Analytics", href: "/dashboard", icon: BarChart3 },
   { name: "News", href: "/dashboard/news", icon: Newspaper },
-  { name: "Product Categories", href: "dashboard/categories", icon: HotelIcon },
+  { name: "View News", href: "/dashboard/view-news", icon: ScanEye },
+  { name: "Product Categories", href: "/dashboard/categories", icon: ListTodo },
+  { name: "View Product Categories", href: "/dashboard/view-categories", icon: ScanEye },
   { name: "Products", href: "/dashboard/products", icon: Landmark },
+  { name: "View Products", href: "/dashboard/view-products", icon: ScanEye },
   { name: "Regions", href: "/dashboard/regions", icon: MapPinHouse },
+  { name: "View Regions", href: "/dashboard/view-regions", icon: ScanEye },
   { name: "Branches", href: "/dashboard/branches", icon: HousePlug },
+  { name: "View Branches", href: "/dashboard/view-branches", icon: ScanEye },
   { name: "Staff", href: "/staff", icon: Building2 },
   { name: "Reports", href: "/reports", icon: FileText },
 ]

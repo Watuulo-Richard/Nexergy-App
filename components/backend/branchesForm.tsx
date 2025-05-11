@@ -11,46 +11,79 @@ import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
 import FormSelectInput from './formInputs/selectInput'
-import { Region } from '@/lib/generated/prisma';
+import { Branch, Region } from '@/lib/generated/prisma';
 
-export default function BranchesForm({fetchedRegions}:{fetchedRegions:Region[]}) {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<BranchTypes>({resolver: zodResolver(branchSchema) });
+export default function BranchesForm({fetchedRegions, fetchedBranch}:{fetchedRegions:Region[], fetchedBranch:Branch | null}) {
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<BranchTypes>({resolver: zodResolver(branchSchema), defaultValues: {
+        name: fetchedBranch?.name,
+        regionId: fetchedBranch?.regionId
+    } });
+
     const [loading, setLoading] = useState(false)
-
-    // const initialMainCategoryId = initialData?.mainCategoryId;
+    const initialRegionId = fetchedRegions.find((region)=> region.id === fetchedBranch?.regionId);
+    const destructureData = {
+        value: initialRegionId?.id,
+        label: initialRegionId?.name
+    }
     const modelOptions = fetchedRegions.map((region) => {
-        
         return {
             value: region.id,
             label: region.name
         }
     });
-    const [selectedCategory, setSelectedCategory] = useState<any>("");
+    const [selectedCategory, setSelectedCategory] = useState<any>(destructureData);
     
     async function onSubmit(branchData:BranchTypes) {
         branchData.regionId = selectedCategory.value
-        try {
-            
-            setLoading(true)
-            const response = await fetch(`${baseUrl}/api/v1/branchesAPI`, {
-                method: "POST",
-                headers: {"Content-Type":"application/json"},
-                body: JSON.stringify(branchData)
-            })
-            console.log(branchData);
-            if(response.ok) {
-                setLoading(false)
+        if(fetchedBranch) {
+            try {
+                const response = await fetch(`${baseUrl}/api/v1/branchesAPI/${fetchedBranch.id}`, {
+                    method: "PATCH",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(branchData)
+                })
                 console.log(response);
                 console.log(branchData);
-                toast.success("Branch Created Successfully")
-                reset()
-            } else {
-                setLoading(false)
-                toast.error("Failed To Create Branch")
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(response);
+                    console.log(branchData);
+                    toast.success("Branch Updated Successfully")
+                } else {
+                    setLoading(false)
+                    console.log(response);
+                    toast.error("Failed To Update Branch")
+                }
+            } catch (error) {
+                console.log(error);
+                toast.error("")
             }
-        } catch (error) {
-            console.log(error);
-            toast.error("Internet Connection Error...!!! Please Try Again")
+        } else {
+            try {
+                setLoading(true)
+                const response = await fetch(`${baseUrl}/api/v1/branchesAPI`, {
+                    method: "POST",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(branchData)
+                })
+                console.log(response);
+                // console.log(branchData);
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(response);
+                    // console.log(branchData);
+                    toast.success("Branch Created Successfully")
+                    reset()
+                } else {
+                    setLoading(false)
+                    console.log(response);
+                    toast.error("Internet Connection Error...!!! Please Try Again")
+                }
+            } catch (error) {
+                setLoading(false)
+                console.log(error);
+                toast.error("Internet Connection Error...!!! Please Try Again")
+            }
         }
     }
   return (
@@ -79,8 +112,8 @@ export default function BranchesForm({fetchedRegions}:{fetchedRegions:Region[]})
                         <CloseButton href="" parent="analytics" />
                         <SubmitButton
                             className='w-full'
-                            // title={editingId ? `Update ${title}` : `Create ${title}`}
-                            title='Create Branch'
+                            title={fetchedBranch ? `Update ${fetchedBranch.name}` : `Create ${"Branch"}`}
+                            // title='Create Branch'
                             loading={loading}
                         />
                     </div>

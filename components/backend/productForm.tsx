@@ -13,7 +13,7 @@ import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
 import FormSelectInput from './formInputs/selectInput'
 import MultipleFileUpload from './pdfUploader';
-import { Category } from '@/lib/generated/prisma';
+import { Category, Product } from '@/lib/generated/prisma';
 
 export type FileProps = {
     title: string;
@@ -22,12 +22,28 @@ export type FileProps = {
     url: string;
 };
 
-export default function ProductForm({fetchedCategories}:{fetchedCategories:Category[]}) {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<ProductTypes>({resolver: zodResolver(productSchema) });
+export default function ProductForm({fetchedProduct, fetchedCategories}:{fetchedCategories:Category[], fetchedProduct:Product | null}) {
+    // console.log(fetchedProduct, "Boom😒");
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<ProductTypes>({resolver: zodResolver(productSchema), defaultValues: {
+        name: fetchedProduct?.name,
+        categoryId: fetchedProduct?.categoryId,
+        price: fetchedProduct?.price,
+        stock: fetchedProduct?.stock,
+        image: fetchedProduct?.image,
+        manual: fetchedProduct?.manual as string
+    } });
     const [loading, setLoading] = useState(false)
-    const [imageUrl, setImageUrl] = useState<string | null>()
+    const initialImage = fetchedProduct?.image || "/Fuel-Image-Upload.svg"
+    const [imageUrl, setImageUrl] = useState<string | null>(initialImage)
 
-    // const initialMainCategoryId = initialData?.mainCategoryId;
+    const initialCategoryId = fetchedCategories.find((initialCategory)=> initialCategory.id === fetchedProduct?.categoryId)
+    console.log(initialCategoryId, "data from API");
+
+    const destructureData = {
+        value: initialCategoryId?.id,
+        label: initialCategoryId?.name
+    }
+
     const modelOptions = fetchedCategories.map((category) => {
         // why??
         return {
@@ -35,7 +51,7 @@ export default function ProductForm({fetchedCategories}:{fetchedCategories:Categ
             label: category.name
         }
     });
-    const [selectedCategory, setSelectedCategory] = useState<any>("");
+    const [selectedCategory, setSelectedCategory] = useState<any>(destructureData);
     const [files, setFiles] = useState<FileProps[]>([]);
     
     async function onSubmit(productData:ProductTypes) {
@@ -44,35 +60,62 @@ export default function ProductForm({fetchedCategories}:{fetchedCategories:Categ
         productData.price = Number(productData.price)
         productData.stock = Number(productData.stock)
         productData.categoryId = selectedCategory.value
-        try {
-            if(!imageUrl) {
-                toast.error("No Image URL")
-                return
-            }
-            if(!files[0].url) {
-                toast.error("No File Uploaded Yet...!!! Please Upload A File")
-                return
-            }
-            setLoading(true)
-            const response = await fetch(`${baseUrl}/api/v1/productsAPI`, {
-                method: "POST",
-                headers: {"Content-Type":"application/json"},
-                body: JSON.stringify(productData)
-            })
-            console.log(productData);
-            if(response.ok) {
+
+        if(fetchedProduct) {
+            try {
+                const response = await fetch(`${baseUrl}/api/v1/productsAPI/${fetchedProduct.id}`, {
+                    method: "PATCH",
+                    headers: {'Content-Type':'application'},
+                    body: JSON.stringify(productData)
+                })
+                // console.log(productData);
+                if(response.ok) {
+                    console.log(response);
+                    // console.log(productData);
+                    setLoading(false)
+                    toast.success("Product Updated Successfully")
+                } else {
+                    toast.error("Failed To Update Product")
+                }
+            } catch (error) {
                 setLoading(false)
-                console.log(response);
-                console.log(productData);
-                toast.success("Product Created Successfully")
-                reset()
-            } else {
-                setLoading(false)
-                toast.error("Failed To Create Product")
+                console.log(error);
+                toast.error("Something Went Wrong...!!!, Please Try Again...!!!")
             }
-        } catch (error) {
-            console.log(error);
-            toast.error("Internet Connection Error...!!! Please Try Again")
+        } else {
+            try {
+                if(!imageUrl) {
+                    toast.error("No Image URL")
+                    return
+                }
+                if(!files[0].url) {
+                    toast.error("No File Uploaded Yet...!!! Please Upload A File")
+                    return
+                }
+                setLoading(true)
+                const response = await fetch(`${baseUrl}/api/v1/productsAPI`, {
+                    method: "POST",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(productData)
+                })
+                // console.log(productData);
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(response);
+                    // console.log(productData);
+                    toast.success("Product Created Successfully")
+                    reset()
+                } else {
+                    setLoading(false)
+                    console.log(response);
+                    // console.log(productData);
+                    toast.error("Failed To Create Product")
+                }
+            } catch (error) {
+                setLoading(false)
+                console.log(error);
+                toast.error("Internet Connection Error...!!! Please Try Again")
+            }
         }
     }
   return (
@@ -127,8 +170,8 @@ export default function ProductForm({fetchedCategories}:{fetchedCategories:Categ
                         <CloseButton href="" parent="analytics" />
                         <SubmitButton
                             className='w-full'
-                            // title={editingId ? `Update ${title}` : `Create ${title}`}
-                            title='Create Product Category'
+                            title={fetchedProduct ? `Update ${"Product"}` : `Create ${"Product"}`}
+                            // title='Create Product'
                             loading={loading}
                         />
                     </div>

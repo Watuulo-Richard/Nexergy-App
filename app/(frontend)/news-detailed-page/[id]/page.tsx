@@ -5,8 +5,8 @@ import React from 'react'
 export default async function page({params}:{params:Promise<{id:string}>}) {
   const {id} = await params
   const fetchedSingleNews = await fetchSingleNews(id)
-  console.log(id);
-  console.log(fetchedSingleNews, "News Available in System");
+  // console.log(id);
+  // console.log(fetchedSingleNews, "News Available in System");
   return (
     <>
       <NewsDetails fetchedSingleNews={fetchedSingleNews}/>

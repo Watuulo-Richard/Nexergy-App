@@ -10,34 +10,65 @@ import SubmitButton from './submitButton';
 import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
+import { Region } from '@/lib/generated/prisma';
 
-export default function RegionForm() {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<RegionTypes>({resolver: zodResolver(regionSchema) });
+export default function RegionForm({fetchedRegion}:{fetchedRegion:Region | null}) {
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<RegionTypes>({resolver: zodResolver(regionSchema), defaultValues:{
+        name: fetchedRegion?.name,
+        code: fetchedRegion?.code
+    } });
     const [loading, setLoading] = useState(false)
     
     async function onSubmit(regionData:RegionTypes) {
-        try {
-
-            setLoading(true)
-            const response = await fetch(`${baseUrl}/api/v1/regionsAPI`, {
-                method: "POST",
-                headers: {"Content-Type":"application/json"},
-                body: JSON.stringify(regionData)
-            })
-            console.log(regionData);
-            if(response.ok) {
-                setLoading(false)
+        if(fetchedRegion) {
+            try {
+                setLoading(true)
+                const response = await fetch(`${baseUrl}/api/v1/regionsAPI/${fetchedRegion.id}`, {
+                    method: "PATCH",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(regionData)
+                })
                 console.log(response);
-                console.log(regionData);
-                toast.success("Region Created Successfully")
-                reset()
-            } else {
+                // console.log(regionData);
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(response);
+                    // console.log(regionData);
+                    toast.success("Region Updated Successfully")
+                } else {
+                    setLoading(false)
+                    console.log(response);
+                    toast.error("Failed To Update Region")
+                }
+            } catch (error) {
                 setLoading(false)
-                toast.error("Failed To Create Region")
+                console.log(error);
+                toast.error("Internet Connection Error...!!! Please Try Again")
             }
-        } catch (error) {
-            console.log(error);
-            toast.error("Internet Connection Error...!!! Please Try Again")
+        } else {
+            try {
+                setLoading(true)
+                const response = await fetch(`${baseUrl}/api/v1/regionsAPI`, {
+                    method: "POST",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(regionData)
+                })
+                console.log(regionData);
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(response);
+                    console.log(regionData);
+                    toast.success("Region Created Successfully")
+                    reset()
+                } else {
+                    setLoading(false)
+                    toast.error("Failed To Create Region")
+                }
+            } catch (error) {
+                setLoading(false)
+                console.log(error);
+                toast.error("Internet Connection Error...!!! Please Try Again")
+            }
         }
     }
   return (
@@ -58,8 +89,8 @@ export default function RegionForm() {
                         <CloseButton href="" parent="analytics" />
                         <SubmitButton
                             className='w-full'
-                            // title={editingId ? `Update ${title}` : `Create ${title}`}
-                            title='Create Region'
+                            title={fetchedRegion ? `Update ${fetchedRegion.name}` : `Create ${"Region"}`}
+                            // title='Create Region'
                             loading={loading}
                         />
                     </div>

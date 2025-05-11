@@ -41,7 +41,7 @@ export async function POST (request:NextRequest) {
 
 export async function GET (request:NextRequest) {
     try {
-        const getAllBranches = await prismaClient.category.findMany({
+        const getAllBranches = await prismaClient.branch.findMany({
             orderBy: {
                 name: "desc"
             }

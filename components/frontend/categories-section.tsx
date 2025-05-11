@@ -80,7 +80,7 @@ export default function CategoriesSection() {
             return (
               <div
                 key={categoryIndex}
-                className="bg-[#1a222c] w-full rounded-lg p-6 shadow-lg relative overflow-hidden transition-all duration-300 hover:shadow-xl group"
+                className="bg-[#1a222c] border-b border-slate-600 w-full rounded-lg p-6 shadow-lg relative overflow-hidden transition-all duration-300 hover:shadow-xl group"
                 style={{
                   boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)",
                 }}
@@ -93,14 +93,14 @@ export default function CategoriesSection() {
                   }}
                 ></div>
                 {/* Dark overlay for text visibility */}
-                <div className="absolute inset-0 bg-black opacity-70"></div>
+                <div className="absolute inset-0 bg-black opacity-35"></div>
   
                 {/* Content - keeping the original structure */}
                 <div className="flex space-x-4 relative z-10">
-                  <div className="border-r-2 border-red-600"></div>
+                  <div className="border-r-2 border-slate-600"></div>
                   <div className="">
-                    <h3 className="text-red-600 font-semibold text-lg">{category.name}</h3>
-                    <p className="text-red-600/90 font-normal text-sm">983 Available Products</p>
+                    <h3 className="text-red-700 font-semibold text-lg">{category.name}</h3>
+                    <p className="text-slate-600/90 font-normal text-sm">983 Available Products</p>
                   </div>
                 </div>
               </div>

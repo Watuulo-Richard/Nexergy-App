@@ -7,7 +7,7 @@ const newsAPISchema = z.object({
 
     title: z.string().min(1, "Minimum One Character"),
     content: z.string(),
-    image: z.string(),
+    image: z.string().optional(),
   
 });
   

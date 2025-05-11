@@ -12,38 +12,71 @@ import SubmitButton from './submitButton';
 import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
+import { News } from '@/lib/generated/prisma'
 
-export default function NewsForm() {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<NewsTypes>({resolver: zodResolver(newsSchema) });
+export default function NewsForm({fetchedSingleNews}:{fetchedSingleNews:News | null}) {
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<NewsTypes>({resolver: zodResolver(newsSchema), defaultValues: {
+        title: fetchedSingleNews?.title,
+        content: fetchedSingleNews?.content,
+        imageUrl: fetchedSingleNews?.imageUrl || "/Fuel-Image-Upload.svg"
+    } });
     const [loading, setLoading] = useState(false)
-    const [imageUrl, setImageUrl] = useState<string | null>()
+    const initialImage = fetchedSingleNews?.imageUrl || "/Fuel-Image-Upload.svg"
+    const [imageUrl, setImageUrl] = useState<string | null>(initialImage)
     async function onSubmit(newsData:NewsTypes) {
         newsData.imageUrl = imageUrl ?? undefined
-        try {
-            if(!imageUrl) {
-                toast.error("No Image Uploaded Yet...!!!🥺")
-                return
-            }
-            setLoading(true)
-            const response = await fetch(`${baseUrl}/api/v1/newsAPI`, {
-                method: "POST",
-                headers: {"Content-Type":"application/json"},
-                body: JSON.stringify(newsData)
-            })
-            console.log(newsData);
-            if(response.ok) {
-                setLoading(false)
+        if(fetchedSingleNews) {
+            try {
+                setLoading(true)
+                const response = await fetch(`${baseUrl}/api/v1/newsAPI/${fetchedSingleNews.id}`, {
+                    method: "PATCH",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(newsData)
+                })
                 console.log(response);
-                console.log(newsData);
-                toast.success("News Headline Created Successfully")
-                reset()
-            } else {
-                setLoading(false)
-                toast.error("Failed To Create News Headline")
+                // console.log(newsData);
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(response);
+                    // console.log(newsData);
+                    toast.success("News Updated Successfully")
+                } else {
+                    setLoading(false)
+                    console.log(response);
+                    // console.log(newsData);
+                    toast.error("Failed To Update News")
+                }
+            } catch (error) {
+                console.log(error);
+                toast.error("Internet Connection Error...!!! Please Try Again")
             }
-        } catch (error) {
-            console.log(error);
-            toast.error("Internet Connection Error...!!! Please Try Again")
+        } else {
+            try {
+                if(!imageUrl) {
+                    toast.error("No Image Uploaded Yet...!!!🥺")
+                    return
+                }
+                setLoading(true)
+                const response = await fetch(`${baseUrl}/api/v1/newsAPI`, {
+                    method: "POST",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(newsData)
+                })
+                // console.log(newsData);
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(response);
+                    console.log(newsData);
+                    toast.success("News Headline Created Successfully")
+                    reset()
+                } else {
+                    setLoading(false)
+                    toast.error("Failed To Create News Headline")
+                }
+            } catch (error) {
+                console.log(error);
+                toast.error("Internet Connection Error...!!! Please Try Again")
+            }
         }
     }
   return (
@@ -74,8 +107,8 @@ export default function NewsForm() {
                         <CloseButton href="" parent="analytics" />
                         <SubmitButton
                             className='w-full'
-                            // title={editingId ? `Update ${title}` : `Create ${title}`}
-                            title='Create News Headline'
+                            title={fetchedSingleNews ? `Update ${fetchedSingleNews.title}` : `Create ${"News Headline"}`}
+                            // title='Create News Headline'
                             loading={loading}
                         />
                     </div>

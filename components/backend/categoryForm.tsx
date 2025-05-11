@@ -12,38 +12,69 @@ import SubmitButton from './submitButton';
 import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
+import { Category } from '@/lib/generated/prisma'
 
-export default function CategoryForm() {
-    const { register, handleSubmit, reset, formState: { errors } } = useForm<CategoryTypes>({resolver: zodResolver(categorySchema) });
+export default function CategoryForm({fetchedCategory}:{fetchedCategory:Category | null}) {
+    const { register, handleSubmit, reset, formState: { errors } } = useForm<CategoryTypes>({resolver: zodResolver(categorySchema), defaultValues: {
+        name: fetchedCategory?.name,
+        description: fetchedCategory?.description,
+        image: fetchedCategory?.image
+    } });
+
     const [loading, setLoading] = useState(false)
-    const [imageUrl, setImageUrl] = useState<string | null>()
+    const initialImage = fetchedCategory?.image || "/Fuel-Image-Upload.svg"
+    const [imageUrl, setImageUrl] = useState<string | null>(initialImage)
     async function onSubmit(categoryData:CategoryTypes) {
         categoryData.image = imageUrl ?? undefined
-        try {
-            if(!imageUrl) {
-                toast.error("No Image URL")
-                return
-            }
-            setLoading(true)
-            const response = await fetch(`${baseUrl}/api/v1/categoriesAPI`, {
-                method: "POST",
-                headers: {"Content-Type":"application/json"},
-                body: JSON.stringify(categoryData)
-            })
-            console.log(categoryData);
-            if(response.ok) {
-                setLoading(false)
+        if(fetchedCategory) {
+            try {
+                setLoading(true)
+                const response = await fetch(`${baseUrl}/api/v1/categoriesAPI/${fetchedCategory.id}`, {
+                    method: "PATCH",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(categoryData)
+                })
                 console.log(response);
-                console.log(categoryData);
-                toast.success("Category Created Successfully")
-                reset()
-            } else {
-                setLoading(false)
-                toast.error("Failed To Create Category")
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(categoryData);
+                    console.log(response);
+                    toast.success("Category Updated Successfully")
+                } else {
+                    setLoading(false)
+                    toast.error("Failed To Update Category")
+                }
+            } catch (error) {
+                console.log(error);
+                toast.error("Internet Connection Error...!!! Please Try Again")
             }
-        } catch (error) {
-            console.log(error);
-            toast.error("Internet Connection Error...!!! Please Try Again")
+        } else {
+            try {
+                if(!imageUrl) {
+                    toast.error("No Image URL")
+                    return
+                }
+                setLoading(true)
+                const response = await fetch(`${baseUrl}/api/v1/categoriesAPI`, {
+                    method: "POST",
+                    headers: {"Content-Type":"application/json"},
+                    body: JSON.stringify(categoryData)
+                })
+                console.log(categoryData);
+                if(response.ok) {
+                    setLoading(false)
+                    console.log(response);
+                    console.log(categoryData);
+                    toast.success("Category Created Successfully")
+                    reset()
+                } else {
+                    setLoading(false)
+                    toast.error("Failed To Create Category")
+                }
+            } catch (error) {
+                console.log(error);
+                toast.error("Internet Connection Error...!!! Please Try Again")
+            }
         }
     }
   return (
@@ -74,8 +105,8 @@ export default function CategoryForm() {
                         <CloseButton href="" parent="analytics" />
                         <SubmitButton
                             className='w-full'
-                            // title={editingId ? `Update ${title}` : `Create ${title}`}
-                            title='Create Product Category'
+                            title={fetchedCategory ? `Update ${fetchedCategory.name}` : `Create ${"Product Category"}`}
+                            // title='Create Product Category'
                             loading={loading}
                         />
                     </div>

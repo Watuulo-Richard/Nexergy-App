@@ -4,11 +4,9 @@ import { z } from "zod";
 
 // Schema for product validation
 const newsAPISchema = z.object({
-
     title: z.string().min(1, "Minimum One Character"),
     content: z.string(),
     imageUrl: z.string().optional(),
-  
 });
   
 export async function POST (request:NextRequest) {
