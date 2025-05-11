@@ -10,7 +10,6 @@ export default async function page() {
   const fetchedProducts = await fetchAllProducts()
   // console.log(fetchedProducts, "Products Have Arrived😒😒😒");
   const fetchedNews = await fetchAllNews()
-  console.log(fetchedNews, "Products Have Arrived😄😄😄");
   // This is our simple object with all the information
 const heroData = {
   title: "Capital Markets Day 2025",

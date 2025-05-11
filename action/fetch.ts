@@ -5,7 +5,7 @@ const categoriesAPI = `${baseUrl}/api/v1/categoriesAPI`
 
 export async function fetchAllCategories() {
     try {
-        const response = await fetch(categoriesAPI)
+        const response = await fetch(categoriesAPI, { cache: 'no-store' })
         const fetchedCategories = await response.json()
         // console.log(fetchedCategories.data);
         return fetchedCategories.data as Category[]
@@ -52,7 +52,7 @@ const productsAPI = `${baseUrl}/api/v1/productsAPI`
 
 export async function fetchAllProducts() {
     try {
-        const response = await fetch(productsAPI)
+        const response = await fetch(productsAPI, { cache: 'no-store' })
         const fetchedProducts = await response.json()
         // console.log(fetchedProducts.data);
         return fetchedProducts.data as Product[]
@@ -97,7 +97,7 @@ export async function deleteProduct(id:string) {
 const branchAPI = `${baseUrl}/api/v1/branchesAPI`
 export async function fetchAllBranches() {
     try {
-        const response = await fetch(branchAPI)
+        const response = await fetch(branchAPI, { cache: 'no-store' })
         const fetchedBranches = await response.json()
         // console.log(fetchedBranches.data);
         return fetchedBranches.data as Branch[]
@@ -142,7 +142,7 @@ export async function deleteBranch(id:string) {
 const regionAPI = `${baseUrl}/api/v1/regionsAPI`
 export async function fetchAllRegions() {
     try {
-        const response = await fetch(regionAPI)
+        const response = await fetch(regionAPI, { cache: 'no-store' })
         const fetchedRegions = await response.json()
         // console.log(fetchedRegions.data);
         return fetchedRegions.data as Region[]
@@ -187,7 +187,7 @@ export async function deleteRegion(id:string) {
 const newsAPI = `${baseUrl}/api/v1/newsAPI`
 export async function fetchAllNews() {
     try {
-        const response = await fetch(newsAPI)
+        const response = await fetch(newsAPI, { cache: 'no-store' })
         const fetchedNews = await response.json()
         // console.log(fetchedNews.data)
         return fetchedNews.data as News[]
