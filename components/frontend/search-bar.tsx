@@ -8,7 +8,7 @@ export default function SearchBar() {
       <div
         className="
         bg-black/80 
-        border border-red-600 
+        border border-slate-600 
         rounded-md px-3 py-1
         flex items-center justify-between
         focus:outline-none
@@ -17,7 +17,7 @@ export default function SearchBar() {
       >
         {/* Left side with search icon */}
         <div className="flex items-center">
-          <Search className="h-6 w-6 text-red-600 mr-2" />
+          <Search className="h-6 w-6 text-slate-600 mr-2" />
 
           {/* Search input field */}
           <input
@@ -28,8 +28,8 @@ export default function SearchBar() {
               border-none outline-none
               focus:outline-none
               focus:ring-0
-              text-red-600 text-sm w-full 
-              placeholder:text-red-400
+              text-slate-600 text-sm w-full 
+              placeholder:text-slate-400
             "
           />
         </div>
@@ -41,9 +41,9 @@ export default function SearchBar() {
             flex items-center justify-center 
             rounded px-1.5 h-5 
             text-xs font-medium 
-            text-red-600 
+            text-slate-600 
             bg-black/50 
-            border border-red-600
+            border border-slate-600
           "
           >
             ⌘K

@@ -21,7 +21,7 @@ const heroData = {
 }
   return (
     <>
-      <TestingSection heroData = {heroData}/>
+      <TestingSection heroData={heroData}/>
       <FeaturedSection  fetchedNews={fetchedNews}/>
       <CategoriesSection />
       <OurLatestProducts fetchedProducts={fetchedProducts}/>

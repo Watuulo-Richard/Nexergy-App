@@ -43,15 +43,15 @@ export default function NavigationBar() {
             </div>
             <div className="">
               <Link href="/cart-page" className="">
-                <div className="relative border border-red-600 hover:border-red-800 rounded-full p-2 shadow-xl hover:shadow-2xl">
-                  <div className="absolute -top-2 right-0 text-white hover:text-red-800 font-semibold z-50 text-sm">{productCartArray.length}</div>
-                  <ShoppingBag className="text-red-600 hover:text-red-800" />
+                <div className="relative border border-slate-600 hover:border-slate-800 rounded-full p-2 shadow-xl hover:shadow-2xl">
+                  <div className="absolute -top-2 right-0 text-white hover:text-slate-200 font-semibold z-50 text-sm">{productCartArray.length}</div>
+                  <ShoppingBag className="text-slate-600 hover:text-slate-200" />
                 </div>
               </Link>
             </div>
             <div className="hidden sm:flex sm:items-center sm:gap-x-2">
               <ShinyButton className="">Login</ShinyButton>
-              <Button className="text-xs text-red-600">Sign Up</Button>
+              <Button className="text-xs text-slate-400 border border-slate-600 bg-transparent">Sign Up</Button>
             </div>
             <div className="block md:hidden">
               <HamburgMenu />
