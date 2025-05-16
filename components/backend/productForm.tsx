@@ -4,7 +4,7 @@ import React, { useState } from 'react'
 import TextInput from './formInputs/textInput'
 import ImageInput from './formInputs/imageInput'
 import { useForm } from 'react-hook-form';
-import { baseUrl, ProductTypes } from '@/types/types';
+import { baseUrl, ProductCategory, ProductTypes } from '@/types/types';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { productSchema } from '@/schemas/schema';
 import SubmitButton from './submitButton';
@@ -22,7 +22,7 @@ export type FileProps = {
     url: string;
 };
 
-export default function ProductForm({fetchedProduct, fetchedCategories}:{fetchedCategories:Category[], fetchedProduct:Product | null}) {
+export default function ProductForm({fetchedProduct, fetchedCategories}:{fetchedCategories:Category[], fetchedProduct:ProductCategory | null}) {
     // console.log(fetchedProduct, "Boom😒");
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ProductTypes>({resolver: zodResolver(productSchema), defaultValues: {
         name: fetchedProduct?.name,

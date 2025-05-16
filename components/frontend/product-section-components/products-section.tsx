@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { Product } from '@/lib/generated/prisma';
 import { useProductState } from '@/store/store';
 import { CircleMinus, CirclePlus, ShoppingCart, Trash2 } from 'lucide-react';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 export default function ProductsSection({ product }: { product: Product }) {
@@ -40,17 +41,20 @@ export default function ProductsSection({ product }: { product: Product }) {
             className="relative flex flex-col my-2 bg-[#1a222c] shadow-xl rounded-lg"
           >
             <div className="relative p-2.5 h-60 overflow-hidden rounded-xl bg-clip-border">
-              <img
+              <Image
                 src={product.image}
+                alt={product.name}
                 className="h-full w-full object-cover rounded-md"
+                height={400}
+                width={400}
               />
             </div>
             <div className="p-4">
               <div className="mb-2 flex items-center justify-between">
-                <p className="text-red-600 text-lg font-semibold">
+                <p className="text-red-600 text-sm font-semibold">
                   {product.name}
                 </p>
-                <p className="text-white text-lg font-medium">
+                <p className="text-white text-md font-medium">
                   ${product.price.toString()}
                 </p>
               </div>
@@ -70,7 +74,7 @@ export default function ProductsSection({ product }: { product: Product }) {
                 productToBeAddedToCart ? (
                   <button
                     onClick={()=>handleRemoveProductFromCart(product.id)}
-                    className="flex items-center justify-center gap-2 rounded-md w-full py-2 px-4 border border-red-600 text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-gray-700 hover:bg-red-600 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    className="flex items-center justify-center gap-2 rounded-md w-full py-2 px-4 border border-slate-600 text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-600/5 focus:shadow-none active:bg-gray-700 hover:bg-red-600/5 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                     type="button"
                   >
                     <Trash2 className='w-6 h-6 text-lg'/>
@@ -80,7 +84,7 @@ export default function ProductsSection({ product }: { product: Product }) {
                   (
                     <button
                       onClick={()=>addToCartFunction()}
-                      className="flex items-center justify-center gap-2 rounded-md w-full py-2 px-4 border border-red-600 text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-700 focus:shadow-none active:bg-gray-700 hover:bg-red-600 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                      className="flex items-center justify-center gap-2 rounded-md w-full py-2 px-4 border border-slate-600 text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-red-600/5 focus:shadow-none active:bg-gray-700 hover:bg-red-600/5 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
                       type="button"
                     >
                       <ShoppingCart className='w-6 h-6 text-lg' />

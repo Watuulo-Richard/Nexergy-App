@@ -28,6 +28,9 @@ export async function PATCH (request:NextRequest, {params}:{params:Promise<{id:s
             where: {
                 id: id
             },
+            include: {
+                category: true
+            },
             data:validatedData
         })
         return NextResponse.json({
@@ -55,6 +58,9 @@ export async function GET (request:NextRequest, {params}:{params:Promise<{id:str
         const getSingleProduct = await prismaClient.product.findUnique({
             where: {
                 id: id
+            },
+            include: {
+                category: true
             }
         })
         return NextResponse.json({

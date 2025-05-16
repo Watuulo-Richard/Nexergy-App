@@ -1,5 +1,5 @@
 import { Branch, Category, News, Product, Region } from "@/lib/generated/prisma";
-import { baseUrl } from "@/types/types";
+import { baseUrl, ProductCategory } from "@/types/types";
 
 const categoriesAPI = `${baseUrl}/api/v1/categoriesAPI`
 
@@ -68,7 +68,7 @@ export async function fetchSingleProduct(id:string) {
         const response = await fetch(productsAPI)
         const fetchedProduct = await response.json()
         // console.log(fetchedProduct.data);
-        return fetchedProduct.data as Product
+        return fetchedProduct.data as ProductCategory
     } catch (error) {
         console.log(error);
         return null

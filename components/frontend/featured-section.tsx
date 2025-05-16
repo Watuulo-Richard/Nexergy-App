@@ -7,11 +7,11 @@ import Link from "next/link"
 export default function FeaturedSection({fetchedNews}:{fetchedNews:News[]}) {
   return (
     <>
-      <section className="bg-[#121820] max-w-7xl container mx-auto py-16">
-        <div className="flex justify-center items-center mb-12">
-          <h3 className="text-red-600 text-3xl font-semibold">Energy Insights & Project Updates</h3>
+      <section id="newssection" className="bg-[#121820] mx-4 md:mx-6 py-4 md:py-16">
+        <div className="flex justify-center items-center mx-4 md:mx-0 mb-6 md:mb-12">
+          <h3 className="text-red-600 text-xl md:text-3xl lg:text-4xl font-semibold">Energy Insights & Project Updates</h3>
         </div>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-[1440] mx-auto">
+        <div className="md:max-w-7xl md:container md:mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mx-4">
           {fetchedNews.map((NewsItem, index) => {
             return (
               <div

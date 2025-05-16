@@ -1,4 +1,4 @@
-import { fetchAllNews, fetchAllProducts } from '@/action/fetch'
+import { fetchAllCategories, fetchAllNews, fetchAllProducts } from '@/action/fetch'
 import CategoriesSection from '@/components/frontend/categories-section'
 import FeaturedSection from '@/components/frontend/featured-section'
 import HelpSection from '@/components/frontend/help-section'
@@ -11,6 +11,8 @@ export default async function page() {
   // console.log(fetchedProducts, "Products Have Arrived😒😒😒");
   const fetchedNews = await fetchAllNews()
   // This is our simple object with all the information
+  const fetchedCategories = await fetchAllCategories()
+  // console.log(fetchedCategories, "Categories Have Arrived😒😒😒");
 const heroData = {
   title: "Capital Markets Day 2025",
   description:
@@ -23,7 +25,7 @@ const heroData = {
     <>
       <TestingSection heroData={heroData}/>
       <FeaturedSection  fetchedNews={fetchedNews}/>
-      <CategoriesSection />
+      <CategoriesSection fetchedCategories={fetchedCategories}/>
       <OurLatestProducts fetchedProducts={fetchedProducts}/>
       <HelpSection />
     </>

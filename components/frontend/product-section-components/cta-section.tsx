@@ -2,7 +2,7 @@ import Image from "next/image"
 
 export default function CTASection() {
   return (
-    <div className="mt-12 py-8 max-w-[1440] mx-auto rounded-lg flex flex-col md:flex-row bg-[#c2baa7]">
+    <div className="mx-4 my-6 md:my-12 py-8 md:container md:max-w-7xl md:mx-auto rounded-lg flex flex-col md:flex-row bg-[#c2baa7]">
       <div className="w-full md:w-1/2 flex items-center justify-center">
         <div className="relative">
           <div className="absolute inset-0">

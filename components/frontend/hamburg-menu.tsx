@@ -11,37 +11,42 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet"
+import { AlignRight, CircleX, X } from "lucide-react"
+import { NavigationMenuItems } from "./navigation-menuItems"
+import Link from "next/link"
+import { ShinyButton } from "../magicui/shiny-button"
 
 export function HamburgMenu() {
   return (
     <Sheet>
       <SheetTrigger asChild>
-        <Button variant="outline">Open</Button>
+        <Button className="bg-transparent border border-slate-600">
+          <AlignRight className="text-slate-600"/>
+        </Button>
       </SheetTrigger>
-      <SheetContent>
+      <SheetContent className="bg-[#121820]">
         <SheetHeader>
-          <SheetTitle>Edit profile</SheetTitle>
-          <SheetDescription>
+          <SheetTitle className="border-b border-slate-600 text-slate-600">Menu</SheetTitle>
+          {/* <SheetDescription>
             Make changes to your profile here. Click save when you're done.
-          </SheetDescription>
+          </SheetDescription> */}
         </SheetHeader>
         <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="name" className="text-right">
-              Name
-            </Label>
-            <Input id="name" value="Pedro Duarte" className="col-span-3" />
+          <div className="grid grid-cols-1 items-center gap-4">
+            <Link href="#newssection">
+              <Button className="w-full bg-transparent border border-slate-600 text-slate-600">News & Insights</Button>
+            </Link>
           </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="username" className="text-right">
-              Username
-            </Label>
-            <Input id="username" value="@peduarte" className="col-span-3" />
+          <div className="grid grid-cols- items-center gap-4">
+            {/* <Link href="#newssection">
+              <Button className="w-full bg-transparent border border-slate-600 text-slate-600">News</Button>
+            </Link> */}
+            <Button className="text-xs text-slate-400 border border-slate-600 bg-transparent">Sign Up</Button>
           </div>
         </div>
         <SheetFooter>
           <SheetClose asChild>
-            <Button type="submit">Save changes</Button>
+            <Button className="w-full text-xs text-slate-400 border border-slate-600 bg-transparent">Login</Button>
           </SheetClose>
         </SheetFooter>
       </SheetContent>

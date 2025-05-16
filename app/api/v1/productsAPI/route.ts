@@ -51,6 +51,9 @@ export async function GET (request:NextRequest) {
         const getAllProducts = await prismaClient.product.findMany({
             orderBy: {
                 name: "desc"
+            },
+            include: {
+                category: true
             }
         })
         return NextResponse.json({

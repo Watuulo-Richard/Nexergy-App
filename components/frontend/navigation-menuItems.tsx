@@ -1,5 +1,4 @@
 "use client"
-
 import * as React from "react"
 import Link from "next/link"
 import { cn } from "@/lib/utils"
@@ -54,34 +53,34 @@ const components: { title: string; href: string; description: string }[] = [
 export function NavigationMenuItems() {
   return (
     <NavigationMenu>
-      <NavigationMenuList>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Who we are</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <ul className="grid gap-3 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+      <NavigationMenuList className="bg-transparent">
+        <NavigationMenuItem className="bg-transparent border border-slate-600 rounded-md">
+          <NavigationMenuTrigger className='text-slate-600'>Who we are</NavigationMenuTrigger>
+          <NavigationMenuContent className="bg-transparent">
+            <ul className="grid gap-0 p-4 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
               <li className="row-span-3">
                 <NavigationMenuLink asChild>
                   <a
-                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-transparent p-6 no-underline outline-none focus:shadow-md"
                     href="/"
                   >
                     {/* <Icons.logo className="h-6 w-6" /> */}
-                    <img src="/totalenergies_parc-eolien-sorbon-ardennes_2024.jpg" alt="" />
-                    <div className="mb-2 mt-4 text-lg font-medium">
-                      Products & Services
+                    <img src="/totalenergies_parc-eolien-sorbon-ardennes_2024.jpg" className="rounded-md" alt="" />
+                    <div className="mb-2 mt-4 text-sm font-medium">
+                      Welcome To Total Energies Uganda
                     </div>
-                    <p className="text-sm leading-tight text-muted-foreground">
-                      TotalEnergies provides energy storage, natural gas, and low-carbon electricity, serving households, industries, and businesses.
+                    <p className="text-xs leading-tight text-muted-foreground">
+                     www.totalenergies.com
                     </p>
                   </a>
                 </NavigationMenuLink>
               </li>
               <ListItem href="/docs" title="TotalEnergies in Uganda MS & EP">
-                In the Marketing & Services (MS) sector, TotalEnergies Uganda has been a trusted brand for over 70 years. It operates a nationwide network of modern service stations that provide high-quality fuels, lubricants, LPG, and car care services. TotalEnergies also supports local businesses with reliable energy solutions and has made significant strides in promoting road safety, customer satisfaction, and environmental stewardship.
+                TotalEnergies Uganda is a subsidiary of TotalEnergies SE, a global multi-energy company headquartered in France. The Uganda branch has played a major role in the country’s energy sector for over 70 years, becoming one of the most recognized fuel and energy brands in Uganda.
               </ListItem>
-              <ListItem href="/docs/installation" title="Installation">
+              {/* <ListItem href="/docs/installation" title="Installation">
                 Projects.
-              </ListItem>
+              </ListItem> */}
               <ListItem href="/docs/primitives/typography" title="Typography">
                 Sustainability
               </ListItem>
@@ -89,7 +88,7 @@ export function NavigationMenuItems() {
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
+          <NavigationMenuTrigger className="text-slate-600 border border-slate-600 rounded-md">What we do</NavigationMenuTrigger>
           <NavigationMenuContent>
             <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] ">
               {components.map((component) => (
@@ -104,10 +103,10 @@ export function NavigationMenuItems() {
             </ul>
           </NavigationMenuContent>
         </NavigationMenuItem>
-        <NavigationMenuItem>
+        <NavigationMenuItem className="text-slate-600 border border-slate-600 rounded-md">
           <Link href="/docs" legacyBehavior passHref>
             <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-              Documentation
+              Careers at Total Energies
             </NavigationMenuLink>
           </Link>
         </NavigationMenuItem>

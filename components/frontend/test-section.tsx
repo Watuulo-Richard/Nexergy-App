@@ -13,7 +13,7 @@ type HeroSectionProps = {
 
 export default function TestingSection({ heroData }:{heroData:HeroSectionProps} ) {
   return (
-    <div className="relative max-w-7xl mx-auto">
+    <div className="relative max-w-7xl mx-4 md:mx-6 lg:mx-auto">
       {/* Outer container with BorderBeam */}
       <div className="relative rounded-2xl h-[650px]">
         {/* Border beam on the outer container */}

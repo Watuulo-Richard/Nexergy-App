@@ -45,7 +45,7 @@ export default function ChildCarousel({items,interval = 4000}: ChildCarouselProp
           className="object-cover"
           priority
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-red-600/70 via-red-500/50 to-transparent" />
+        <div className="absolute inset-0 bg-gradient-to-t from-red-200/70 via-red-400/50 to-transparent" />
         <div className="absolute bottom-0 w-full p-6 text-center">
           <h2 className="text-5xl font-bold text-white tracking-wide">{items[currentIndex].word}</h2>
         </div>

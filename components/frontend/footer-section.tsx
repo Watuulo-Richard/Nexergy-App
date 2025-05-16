@@ -7,7 +7,7 @@ export default function Footer() {
   return (
     <footer className="bg-[#1a1f24] text-white">
       <div className="container py-16 max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-[1440] mx-auto">
+        <div className="mx-4 grid grid-cols-1 md:grid-cols-3 gap-8">
           {/* Column 1 */}
           <div>
             <h3 className="text-xl font-medium mb-6">Explore Shell.com</h3>
@@ -107,9 +107,9 @@ export default function Footer() {
       </div>
 
       {/* Bottom section with legal links */}
-      <div className="border-t border-gray-700 max-w-[1440] mx-auto">
-        <div className="container mx-auto py-4 flex flex-col md:flex-row justify-between items-center">
-          <div className="flex flex-wrap gap-4 md:gap-6 mb-4 md:mb-0">
+      <div className="border-t border-gray-700 max-w-7xl mx-auto">
+        <div className="container mx-auto py-4 px-4 flex flex-col justify-start items-start md:flex-row md:justify-between md:items-center">
+          <div className="flex flex-col md:flex-row gap-4 md:gap-6 mb-4 md:mb-0">
             <Link href="#" className="text-gray-300 hover:text-red-600/90 text-sm transition-colors">
               Accessibility
             </Link>

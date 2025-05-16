@@ -1,3 +1,5 @@
+import { Category } from "@/lib/generated/prisma"
+
 export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 
 export type userTypes = {
@@ -25,6 +27,17 @@ export type ProductTypes = {
   stock:number;
   image?:string;
   manual?:string;
+}
+
+export type ProductCategory = {
+  id:string;
+  name:string;
+  price:number;
+  stock:number;
+  image:string;
+  manual:string;
+  categoryId:string;
+  category: Category
 }
 
 export type BranchTypes = {

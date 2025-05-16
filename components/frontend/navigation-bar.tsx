@@ -1,17 +1,14 @@
 "use client"
 import Link from "next/link"
 import { NavigationMenuItems } from "./navigation-menuItems"
-import { ShoppingBag, ShoppingCart } from "lucide-react"
+import { ShoppingBag } from "lucide-react"
 import { ShinyButton } from "../magicui/shiny-button"
 import { Button } from "../ui/button"
 import { HamburgMenu } from "./hamburg-menu"
-import { LineShadowText } from "@/components/magicui/line-shadow-text";
 import SearchBar from "./search-bar"
 import { useProductState } from "@/store/store"
 export default function NavigationBar() {
-  // const theme = useTheme();
-  // const shadowColor = theme.resolvedTheme === "dark" ? "white" : "black";
-  const {handleClear, productCartArray} = useProductState()
+  const {productCartArray} = useProductState()
   return (
     <>
       <nav className="fixed top-0 z-50 w-full px-8 border-b border-slate-600 bg-[#121820] backdrop-blur">
@@ -20,25 +17,19 @@ export default function NavigationBar() {
             {/* Logo */}
             <div>
               <Link aria-label="home" href="/" className="flex items-center space-x-2">
-                <p className="font-semibold flex">
-                  <span className="text-5xl text-red-600">T</span>
-                  <div className="flex items-center">
-                    <LineShadowText className="text-red-600 italic" >
-                      otalEnergies
-                    </LineShadowText>
-                    {/* <span className="text-sm">otalEnergies</span> */}
-                  </div>
-                </p>
+                <div className="flex items-center border border-slate-600 rounded-full p-2">
+                  <img src="/logo_totalenergies.png" className="h-10 w-10 object-contain" alt="" />
+                </div>
               </Link>
             </div>
           </div>
           {/* Menu-Items */}
-          <div className="hidden md:block">
+          <div className="hidden lg:block">
             <NavigationMenuItems />
           </div>
           {/* Search */}
           <div className="flex items-center gap-x-2 md:gap-x-2">
-            <div className="">
+            <div className="hidden lg:block">
               <SearchBar />
             </div>
             <div className="">
@@ -53,7 +44,7 @@ export default function NavigationBar() {
               <ShinyButton className="">Login</ShinyButton>
               <Button className="text-xs text-slate-400 border border-slate-600 bg-transparent">Sign Up</Button>
             </div>
-            <div className="block md:hidden">
+            <div className="block lg:hidden">
               <HamburgMenu />
             </div>
           </div>
