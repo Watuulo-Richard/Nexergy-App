@@ -2,19 +2,19 @@
 
 import { baseUrl, ProductCategory, ProductTypes } from '@/types/types';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { ProductFormTypes, productSchema } from '@/schemas/schema';
 import { useForm } from 'react-hook-form';
 import { CaseSensitive } from 'lucide-react'
 import React, { useState } from 'react'
 import FormSelectInput from './formInputs/selectInput'
 import { toast } from 'sonner'
 import CloseButton from './formInputs/closeButton';
-import { Category } from '@/lib/generated/prisma';
-import { ProductFormTypes, productSchema } from '@/schemas/schema';
 import ImageInput from './formInputs/imageInput';
 import MultipleFileUpload from './pdfUploader';
 import TextInput from './formInputs/textInput'
 import { useRouter } from 'next/navigation';
 import SubmitButton from './submitButton';
+import { Category } from '@prisma/client';
 
 export type FileProps = {
     title: string;

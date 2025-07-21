@@ -1,4 +1,4 @@
-import { Category } from "@/lib/generated/prisma"
+import { Category } from "@prisma/client"
 
 export const baseUrl = process.env.NEXT_PUBLIC_BASE_URL
 

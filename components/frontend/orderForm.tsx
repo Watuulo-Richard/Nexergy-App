@@ -24,9 +24,9 @@ import {
 import { useForm } from 'react-hook-form';
 import { baseUrl, OrderTypes } from '@/types/types';
 import { useState } from 'react';
-import { Branch } from '@/lib/generated/prisma';
 import { toast } from 'sonner';
 import { Loader2 } from 'lucide-react';
+import { Branch } from '@prisma/client';
 
 export function OrderDialogForm({
   fetchedBranches,

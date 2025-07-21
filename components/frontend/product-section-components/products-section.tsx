@@ -1,8 +1,8 @@
 "use client"
 import Image from 'next/image';
+import { Product } from '@prisma/client';
 import { Button } from '@/components/ui/button';
 import { useProductState } from '@/store/store';
-import { Product } from '@/lib/generated/prisma';
 import React, { useState } from 'react';
 import { CircleMinus, CirclePlus, ShoppingCart, Trash2 } from 'lucide-react';
 

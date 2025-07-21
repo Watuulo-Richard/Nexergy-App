@@ -4,8 +4,6 @@ import { ProductCategory } from '@/types/types'
 import { BookOpen } from 'lucide-react'
 
 export default function ProductDetail({fetchedProduct}:{fetchedProduct:ProductCategory | null}) {
-    // console.log(fetchedProduct, "Oh My God....🫢🫢");
-    // console.log(fetchedProduct, "hahahhaha..........😁😁");
   return (
     <>
         <section className='text-white px-4 md:px-0 md:py-16 max-w-7xl container mx-auto'>

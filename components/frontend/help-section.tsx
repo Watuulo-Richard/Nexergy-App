@@ -1,7 +1,6 @@
 import React from 'react'
 import { Button } from '../ui/button'
 import { CreditCard, MapPin, Milestone } from 'lucide-react'
-
 export default function HelpSection() {
   return (
     <>

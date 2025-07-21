@@ -1,5 +1,4 @@
 import { Search } from "lucide-react"
-
 export default function SearchBar() {
   // A simple search bar with red styling
   return (

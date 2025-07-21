@@ -5,7 +5,7 @@ import { Card, CardContent, CardFooter, CardHeader } from '../ui/card';
 import { motion } from 'framer-motion';
 import { useProductState } from '@/store/store';
 import { OrderDialogForm } from './orderForm';
-import { Branch } from '@/lib/generated/prisma';
+import { Branch } from '@prisma/client';
 
 export default function ProductCart({fetchedBranches}:{fetchedBranches:Branch[]}) {
   const {

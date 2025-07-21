@@ -1,5 +1,5 @@
 'use client';
-import { Product } from '@/lib/generated/prisma';
+
 import {
   ArrowRight,
   CheckIcon,
@@ -10,6 +10,7 @@ import {
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { ShimmerButton } from "@/components/magicui/shimmer-button";
+import { Product } from '@prisma/client';
 
 export default function OurLatestProducts({
   fetchedProducts,

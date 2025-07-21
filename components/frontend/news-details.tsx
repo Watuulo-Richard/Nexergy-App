@@ -2,8 +2,8 @@
 
 import { Phone } from "lucide-react"
 import { motion } from "framer-motion"
-import { News } from "@/lib/generated/prisma"
 import Image from "next/image"
+import { News } from "@prisma/client"
 
 export default function NewsDetails({fetchedSingleNews}:{fetchedSingleNews:News | null}) {
     // console.log(fetchedSingleNews, "am here");

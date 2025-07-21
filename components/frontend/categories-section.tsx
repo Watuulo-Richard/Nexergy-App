@@ -1,4 +1,5 @@
-import { Category } from "@/lib/generated/prisma"
+import { Category } from "@prisma/client"
+
 
 export default function CategoriesSection({fetchedCategories}:{fetchedCategories:Category[]}) {
     const showCategories = fetchedCategories.slice(0, 6)

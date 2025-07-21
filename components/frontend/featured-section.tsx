@@ -1,5 +1,6 @@
 "use client"
-import { News } from "@/lib/generated/prisma"
+
+import { News } from "@prisma/client"
 import { ArrowRight } from "lucide-react"
 import Image from "next/image"
 import Link from "next/link"

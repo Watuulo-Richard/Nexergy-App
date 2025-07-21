@@ -1,6 +1,6 @@
-import { Branch, Category, News, Product, Region } from "@/lib/generated/prisma";
+// import { Branch, Category, News, Product, Region } from "@/lib/generated/prisma";
 import { baseUrl, ProductCategory } from "@/types/types";
-import { Order } from "@prisma/client";
+import { Branch, Category, News, Order, Product, Region } from "@prisma/client";
 
 const categoriesAPI = `${baseUrl}/api/v1/categoriesAPI`
 

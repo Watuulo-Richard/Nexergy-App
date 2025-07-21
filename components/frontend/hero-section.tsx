@@ -3,7 +3,6 @@
 import HeroCarousel from "./hero-carousel"
 import { CardHoverEffectDemo } from "./news-cards"
 
-
 export default function HeroSection() {
   // Sample array of 4 images
   const carouselImages = [

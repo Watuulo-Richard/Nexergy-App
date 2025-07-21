@@ -9,7 +9,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog"
-import { Product } from "@/lib/generated/prisma"
 import { ProductCategory } from "@/types/types"
 import { Download, AlertCircle, Loader2 } from "lucide-react"
 import { useState, useEffect } from "react"
