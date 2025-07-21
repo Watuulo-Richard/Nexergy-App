@@ -10,7 +10,7 @@ import SubmitButton from './submitButton';
 import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
-import { Region } from '@/lib/generated/prisma';
+import { Region } from '@prisma/client';
 
 export default function RegionForm({fetchedRegion}:{fetchedRegion:Region | null}) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<RegionTypes>({resolver: zodResolver(regionSchema), defaultValues:{

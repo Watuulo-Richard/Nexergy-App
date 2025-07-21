@@ -12,7 +12,7 @@ import SubmitButton from './submitButton';
 import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
-import { News } from '@/lib/generated/prisma'
+import { News } from '@prisma/client'
 
 export default function NewsForm({fetchedSingleNews}:{fetchedSingleNews:News | null}) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<NewsTypes>({resolver: zodResolver(newsSchema), defaultValues: {

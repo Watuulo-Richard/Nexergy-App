@@ -1,10 +1,10 @@
 "use client";
-import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import { Branch } from "@prisma/client";
+import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
 import SortableColumn from "@/components/backend/DataTableColumns/SortableColumn";
 import ActionColumn from "@/components/backend/DataTableColumns/ActionColumn";
-import { Branch, News } from "@/lib/generated/prisma";
 import ImageColumn from "@/components/backend/DataTableColumns/ImageColumn";
 
 export const columns: ColumnDef<Branch>[] = [

@@ -1,11 +1,11 @@
 "use client";
-import { ColumnDef } from "@tanstack/react-table";
 import Link from "next/link";
+import { Category } from "@prisma/client";
+import { ColumnDef } from "@tanstack/react-table";
 import { Eye } from "lucide-react";
-import SortableColumn from "@/components/backend/DataTableColumns/SortableColumn";
-import ActionColumn from "@/components/backend/DataTableColumns/ActionColumn";
-import { Category, News } from "@/lib/generated/prisma";
 import ImageColumn from "@/components/backend/DataTableColumns/ImageColumn";
+import ActionColumn from "@/components/backend/DataTableColumns/ActionColumn";
+import SortableColumn from "@/components/backend/DataTableColumns/SortableColumn";
 
 export const columns: ColumnDef<Category>[] = [
   {

@@ -11,7 +11,7 @@ import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
 import FormSelectInput from './formInputs/selectInput'
-import { Branch, Region } from '@/lib/generated/prisma';
+import { Branch, Region } from '@prisma/client';
 
 export default function BranchesForm({fetchedRegions, fetchedBranch}:{fetchedRegions:Region[], fetchedBranch:Branch | null}) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<BranchTypes>({resolver: zodResolver(branchSchema), defaultValues: {

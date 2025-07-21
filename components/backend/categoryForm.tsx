@@ -12,8 +12,8 @@ import SubmitButton from './submitButton';
 import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
-import { Category } from '@/lib/generated/prisma'
 import { useRouter } from 'next/navigation'
+import { Category } from '@prisma/client'
 
 export default function CategoryForm({fetchedCategory}:{fetchedCategory:Category | null}) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<CategoryTypes>({resolver: zodResolver(categorySchema), defaultValues: {

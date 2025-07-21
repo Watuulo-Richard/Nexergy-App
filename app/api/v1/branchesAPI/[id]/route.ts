@@ -1,6 +1,6 @@
 import { prismaClient } from "@/prisma/db";
-import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
+import { NextRequest, NextResponse } from "next/server";
 
 // Schema for product validation
 const branchAPISchema = z.object({

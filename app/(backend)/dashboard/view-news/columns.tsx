@@ -4,8 +4,8 @@ import Link from "next/link";
 import { Eye } from "lucide-react";
 import SortableColumn from "@/components/backend/DataTableColumns/SortableColumn";
 import ActionColumn from "@/components/backend/DataTableColumns/ActionColumn";
-import { News } from "@/lib/generated/prisma";
 import ImageColumn from "@/components/backend/DataTableColumns/ImageColumn";
+import { News } from "@prisma/client";
 
 export const columns: ColumnDef<News>[] = [
   {
