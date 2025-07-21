@@ -1,10 +1,10 @@
 "use client"
-import { Button } from '@/components/ui/button';
-import { Product } from '@/lib/generated/prisma';
-import { useProductState } from '@/store/store';
-import { CircleMinus, CirclePlus, ShoppingCart, Trash2 } from 'lucide-react';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
+import { useProductState } from '@/store/store';
+import { Product } from '@/lib/generated/prisma';
 import React, { useState } from 'react';
+import { CircleMinus, CirclePlus, ShoppingCart, Trash2 } from 'lucide-react';
 
 export default function ProductsSection({ product }: { product: Product }) {
   const {
@@ -14,7 +14,7 @@ export default function ProductsSection({ product }: { product: Product }) {
   } = useProductState();
   const [productCount, setProductCount] = useState(0)
   function handleCountIncrement() {
-    // By Writing Prev I Mean By Product Count
+    // By Writing Prev I Mean By Product Count -> the state that is storing the data temporarily
     setProductCount((prev)=> prev +  1)
   }
   function handleCountDecrement() {
@@ -31,7 +31,8 @@ export default function ProductsSection({ product }: { product: Product }) {
       name:product.name,
       image:product.image,
       price:product.price,
-      numberOfProducts:productCount
+      numberOfProducts:productCount,
+      stock: product.stock
     }
     handleAddToCartNow(cartObject)
   }

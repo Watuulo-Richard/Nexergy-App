@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
-import { Montserrat_Alternates } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
 
-const montserratAlternates = Montserrat_Alternates({
-  variable: "--font-Montserrat-Alternates",
+const quickSand = Quicksand({
+  variable: "--font-QuickSand",
   subsets: ["latin"],
-  weight: ['400', '500', '600', '700'],
+  weight: ['300', '400', '500', '600', '700'],
   display: "swap"
 });
 
@@ -22,7 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={montserratAlternates.variable}>
+      <body className={quickSand.variable}>
         {children}
         <Toaster richColors />
       </body>

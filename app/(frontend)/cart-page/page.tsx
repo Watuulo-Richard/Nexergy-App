@@ -1,7 +1,10 @@
+import { fetchAllBranches } from '@/action/fetch'
 import ProductCart from '@/components/frontend/product-cart'
 import React from 'react'
 
-export default function page() {
+export default async function page() {
+  const fetchedBranches = await fetchAllBranches()
+  console.log(fetchedBranches);
   // const num1=5;
   // const num2="5"
 
@@ -9,7 +12,7 @@ export default function page() {
   // console.log(result);
   return (
     <>
-      <ProductCart />
+      <ProductCart fetchedBranches={fetchedBranches}/>
     </>
   )
 }

@@ -1,11 +1,13 @@
 "use server";
-
+import { Resend } from 'resend';
 import { prismaClient } from "@/prisma/db";
 import { NextRequest, NextResponse } from "next/server";
 import { hashSync } from "bcrypt-ts";
+import EmailTemplate from '@/components/email/emailTemplate';
 export async function POST(request:NextRequest) {
-  const userData = await request.json()
-  const { name, email, password } = userData;
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  const userDetails = await request.json()
+  const { firstName, lastName, role, email, password } = userDetails;
   try {
     const existingUser = await prismaClient.user.findUnique({
       where: {
@@ -20,7 +22,7 @@ export async function POST(request:NextRequest) {
       });
     }
     // Encrypt the Password =>bcrypt
-    const hashedPassword = await hashSync(password, 10);
+    const hashedPassword = hashSync(password, 10);
     //Generate Token
     const generateToken = () => {
       const min = 100000; // Minimum 6-figure number
@@ -30,27 +32,29 @@ export async function POST(request:NextRequest) {
     const userToken = generateToken();
     const newUser = await prismaClient.user.create({
       data: {
-        name,
+        firstName,
+        lastName,
         email,
         password: hashedPassword,
+        role,
         token: userToken,
       },
     });
     //Send an Email with the Token on the link as a search param
     const token = newUser.token;
-    // const userId = newUser.id;
+    const userId = newUser.id;
     // const userName = newUser.name.split(" ")[0];
-    // const linkText = "Verify your Account ";
-    // const message =
-    //   "Thank you for registering with Gecko. To complete your registration and verify your email address, please enter the following 6-digit verification code on our website :";
-    // const sendMail = await resend.emails.send({
-    //   from: "Medical App <info@jazzafricaadventures.com>",
-    //   to: email,
-    //   subject: "Verify Your Email Address",
-    //   react: EmailTemplate({ firstName, token, linkText, message }),
-    // });
+    const linkText = "Verify your Account ";
+    const message =
+      "Thank you for registering with Nexergy Energies. To complete your registration and verify your email address, please enter the following 6-digit verification code on our website :";
+    const sendMail = await resend.emails.send({
+      from: "Nexergy App <info@lubegajovan.com>",
+      to: email,
+      subject: "Verify Your Email Address",
+      react: EmailTemplate({ firstName, lastName, token, linkText, message }),
+    });
     console.log(token);
-    // console.log(sendMail);
+    console.log(sendMail);
     console.log(newUser);
     // return {
     //   data: newUser,

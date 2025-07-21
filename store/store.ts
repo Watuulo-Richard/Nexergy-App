@@ -8,6 +8,7 @@ export type ProductCartType = {
     price:number;
     image:string;
     numberOfProducts: number;
+    stock: number
 }
 
 type ProductState = {
@@ -81,6 +82,7 @@ export const useProductState = create<ProductState>()(
                 toast.error("First Add The Product To Cart")
             }
         }
+        
          
     }),
     {

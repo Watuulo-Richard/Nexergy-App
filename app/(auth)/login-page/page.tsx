@@ -1,10 +1,10 @@
-import SignUpForm from '@/components/backend/signUpForm'
+import LoginInForm from '@/components/backend/auth/loginForm'
 import React from 'react'
 
 export default function page() {
   return (
     <>
-      <SignUpForm />
+      <LoginInForm />
     </>
   )
 }

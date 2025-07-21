@@ -3,16 +3,16 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
 // Schema for product validation
-const productAPISchema = z.object({
+// const productAPISchema = z.object({
 
-    name: z.string().min(1, "Minimum 3 Characters"),
-    categoryId: z.string(),
-    price:z.coerce.number(),
-    stock:z.coerce.number(),
-    image: z.string(),
-    manual:z.string().optional(),
+//     name: z.string().min(1, "Minimum 3 Characters"),
+//     categoryId: z.string(),
+//     price:z.coerce.number(),
+//     stock:z.coerce.number(),
+//     image: z.string(),
+//     manual:z.string().optional(),
   
-});
+// });
   
 export async function PATCH (request:NextRequest, {params}:{params:Promise<{id:string}>}) {
     // const productData = await request.json()
@@ -23,7 +23,7 @@ export async function PATCH (request:NextRequest, {params}:{params:Promise<{id:s
         const {id} = await params
         const productData = await request.json()
         // Validate Data
-        const validatedData = productAPISchema.parse(productData)
+        // const validatedData = productAPISchema.parse(productData)
         const updateProduct = await prismaClient.product.update({
             where: {
                 id: id
@@ -31,7 +31,7 @@ export async function PATCH (request:NextRequest, {params}:{params:Promise<{id:s
             include: {
                 category: true
             },
-            data:validatedData
+            data:productData
         })
         return NextResponse.json({
             message: "Product Updated Successfully",

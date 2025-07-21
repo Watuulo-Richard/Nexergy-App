@@ -9,13 +9,13 @@ body {
 }
 
 :root {
-  --font-Montserrat-Alternates: "Montserrat Alternates", sans-serif;
+  --font-QuickSand: "Quicksand", sans-serif;
 }
 
 @layer base {
   body {
     @apply bg-[#121820];
-    font-family: var(--font-Montserrat-Alternates);
+    font-family: var(--font-QuickSand);
   }
 }
 

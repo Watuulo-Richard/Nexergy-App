@@ -6,7 +6,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { AlertDialog, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "@/components/ui/alert-dialog";
 
-import { deleteBranch, deleteCategory, deleteNews, deleteProduct, deleteRegion } from "@/action/fetch";
+import { deleteBranch, deleteCategory, deleteNews, deleteOrder, deleteProduct, deleteRegion } from "@/action/fetch";
 
 type ActionColumnProps = {
   row: any;
@@ -50,6 +50,12 @@ export default function ActionColumn({
         }
       } else if (model === "Product") {
         const res = await deleteProduct(id)
+        if (res?.ok) {
+          window.location.reload()
+          toast.success(`${model} Deleted Successfully`)
+        }
+      } else if (model === "Order") {
+        const res = await deleteOrder(id)
         if (res?.ok) {
           window.location.reload()
           toast.success(`${model} Deleted Successfully`)

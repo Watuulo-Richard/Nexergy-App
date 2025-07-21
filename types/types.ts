@@ -58,3 +58,21 @@ export type NewsTypes = {
   content:string;
   imageUrl?:string,
 }
+export type OrderItemTypes = {
+  name:string;
+  price:number;
+  stock:number;
+  image:string;
+  manual?:string;
+}
+
+export type OrderTypes = {
+  email:string;
+  firstName:string;
+  lastName:string;
+  phone:string;
+  branchId?:string;
+  orderItems?:OrderItemTypes[];
+}
+
+// https://lh3.googleusercontent.com/a/ACg8ocLZ8Prhe4G9JYaLbD2NdEU4QCvF0c0Snd3VgS94-twHECPVa3CW=s96-c

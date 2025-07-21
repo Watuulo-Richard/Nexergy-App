@@ -41,8 +41,12 @@ export default function NavigationBar() {
               </Link>
             </div>
             <div className="hidden sm:flex sm:items-center sm:gap-x-2">
-              <ShinyButton className="">Login</ShinyButton>
-              <Button className="text-xs text-slate-400 border border-slate-600 bg-transparent">Sign Up</Button>
+              <Link aria-label="login-page" href="/login-page">
+                <ShinyButton className="">Login</ShinyButton>
+              </Link>
+              <Link aria-label="sign-up-page" href="/sign-up-page">
+                <Button className="text-xs text-slate-400 border border-slate-600 bg-transparent">Sign Up</Button>
+              </Link>
             </div>
             <div className="block lg:hidden">
               <HamburgMenu />

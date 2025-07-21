@@ -1,19 +1,20 @@
 "use client"
 
-import React, { useState } from 'react'
-import TextInput from './formInputs/textInput'
-import ImageInput from './formInputs/imageInput'
-import { useForm } from 'react-hook-form';
 import { baseUrl, ProductCategory, ProductTypes } from '@/types/types';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { productSchema } from '@/schemas/schema';
-import SubmitButton from './submitButton';
-import CloseButton from './formInputs/closeButton';
-import { toast } from 'sonner'
+import { useForm } from 'react-hook-form';
 import { CaseSensitive } from 'lucide-react'
+import React, { useState } from 'react'
 import FormSelectInput from './formInputs/selectInput'
+import { toast } from 'sonner'
+import CloseButton from './formInputs/closeButton';
+import { Category } from '@/lib/generated/prisma';
+import { ProductFormTypes, productSchema } from '@/schemas/schema';
+import ImageInput from './formInputs/imageInput';
 import MultipleFileUpload from './pdfUploader';
-import { Category, Product } from '@/lib/generated/prisma';
+import TextInput from './formInputs/textInput'
+import { useRouter } from 'next/navigation';
+import SubmitButton from './submitButton';
 
 export type FileProps = {
     title: string;
@@ -23,7 +24,8 @@ export type FileProps = {
 };
 
 export default function ProductForm({fetchedProduct, fetchedCategories}:{fetchedCategories:Category[], fetchedProduct:ProductCategory | null}) {
-    // console.log(fetchedProduct, "Boom😒");
+    // console.log(fetchedProduct);
+    
     const { register, handleSubmit, reset, formState: { errors } } = useForm<ProductTypes>({resolver: zodResolver(productSchema), defaultValues: {
         name: fetchedProduct?.name,
         categoryId: fetchedProduct?.categoryId,
@@ -32,10 +34,10 @@ export default function ProductForm({fetchedProduct, fetchedCategories}:{fetched
         image: fetchedProduct?.image,
         manual: fetchedProduct?.manual as string
     } });
+    const router = useRouter()
     const [loading, setLoading] = useState(false)
     const initialImage = fetchedProduct?.image || "/Fuel-Image-Upload.svg"
     const [imageUrl, setImageUrl] = useState<string | null>(initialImage)
-
     const initialCategoryId = fetchedCategories.find((initialCategory)=> initialCategory.id === fetchedProduct?.categoryId)
     console.log(initialCategoryId, "data from API");
 
@@ -54,7 +56,7 @@ export default function ProductForm({fetchedProduct, fetchedCategories}:{fetched
     const [selectedCategory, setSelectedCategory] = useState<any>(destructureData);
     const [files, setFiles] = useState<FileProps[]>([]);
     
-    async function onSubmit(productData:ProductTypes) {
+    async function onSubmit(productData:ProductFormTypes) {
         productData.image = imageUrl ?? undefined
         productData.manual = files[0].url
         productData.price = Number(productData.price)
@@ -74,6 +76,7 @@ export default function ProductForm({fetchedProduct, fetchedCategories}:{fetched
                     // console.log(productData);
                     setLoading(false)
                     toast.success("Product Updated Successfully")
+                    router.push('/dashboard/view-products')
                 } else {
                     toast.error("Failed To Update Product")
                 }
@@ -105,6 +108,7 @@ export default function ProductForm({fetchedProduct, fetchedCategories}:{fetched
                     // console.log(productData);
                     toast.success("Product Created Successfully")
                     reset()
+                    router.push('/dashboard/view-products')
                 } else {
                     setLoading(false)
                     console.log(response);

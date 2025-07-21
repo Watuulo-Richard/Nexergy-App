@@ -28,7 +28,7 @@ export async function POST (request:NextRequest) {
             data:validatedData
         })
         return NextResponse.json({
-            message: "Product Created Successfully",
+            message: "Product Saved Successfully",
             data: createProduct,
             status: 201
         }, {
@@ -37,7 +37,7 @@ export async function POST (request:NextRequest) {
     } catch (error) {
         console.log(error);
         return NextResponse.json({
-            message: "Failed To Create Product",
+            message: "Failed To Save Product",
             data: null,
             status: 500
         }, {

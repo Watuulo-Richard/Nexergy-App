@@ -1,5 +1,6 @@
 import { Branch, Category, News, Product, Region } from "@/lib/generated/prisma";
 import { baseUrl, ProductCategory } from "@/types/types";
+import { Order } from "@prisma/client";
 
 const categoriesAPI = `${baseUrl}/api/v1/categoriesAPI`
 
@@ -214,6 +215,54 @@ export async function deleteNews(id:string) {
     const deleteNewsAPI = `${baseUrl}/api/v1/newsAPI/${id}`
     try {
         const response = await fetch(deleteNewsAPI, {
+            method: "DELETE",
+            headers: {
+                "Content-Type":"application/json"
+            }
+        })
+        console.log(response);
+        return {
+            ok: true
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            ok: false
+        }
+    }
+}
+
+const orderAPIRoute = `${baseUrl}/api/v1/orderAPI`
+
+export async function fetchAllOrdersAction() {
+    try {
+        const response = await fetch(orderAPIRoute, { cache: 'no-store' })
+        const orders = await response.json()
+        // console.log(fetchedCategories.data);
+        return orders.data as Order[]
+    } catch (error) {
+        console.log(error);
+        return []
+    }
+}
+
+export async function fetchSingleOrderAction(id:string) {
+    const singleOrderAPIRoute = `${baseUrl}/api/v1/orderAPI/${id}`
+    try {
+        const response = await fetch(singleOrderAPIRoute)
+        const fetchedSingleOrder = await response.json()
+        // console.log(fetchedSingleOrder.data);
+        return fetchedSingleOrder.data as Order
+    } catch (error) {
+        console.log(error);
+        return null
+    }
+}
+
+export async function deleteOrder(id:string) {
+    const deleteOrderAPIRoute = `${baseUrl}/api/v1/orderAPI/${id}`
+    try {
+        const response = await fetch(deleteOrderAPIRoute, {
             method: "DELETE",
             headers: {
                 "Content-Type":"application/json"

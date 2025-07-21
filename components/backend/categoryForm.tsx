@@ -13,6 +13,7 @@ import CloseButton from './formInputs/closeButton';
 import { toast } from 'sonner'
 import { CaseSensitive } from 'lucide-react'
 import { Category } from '@/lib/generated/prisma'
+import { useRouter } from 'next/navigation'
 
 export default function CategoryForm({fetchedCategory}:{fetchedCategory:Category | null}) {
     const { register, handleSubmit, reset, formState: { errors } } = useForm<CategoryTypes>({resolver: zodResolver(categorySchema), defaultValues: {
@@ -21,6 +22,7 @@ export default function CategoryForm({fetchedCategory}:{fetchedCategory:Category
         image: fetchedCategory?.image
     } });
 
+    const router = useRouter()
     const [loading, setLoading] = useState(false)
     const initialImage = fetchedCategory?.image || "/Fuel-Image-Upload.svg"
     const [imageUrl, setImageUrl] = useState<string | null>(initialImage)
@@ -67,6 +69,7 @@ export default function CategoryForm({fetchedCategory}:{fetchedCategory:Category
                     console.log(categoryData);
                     toast.success("Category Created Successfully")
                     reset()
+                    router.push('/dashboard/view-categories')
                 } else {
                     setLoading(false)
                     toast.error("Failed To Create Category")

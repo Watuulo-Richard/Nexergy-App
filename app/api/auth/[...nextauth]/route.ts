@@ -1,4 +1,3 @@
-// import { authOptions } from "@/config/auth";
 import { authOptions } from "@/lib/authOptions";
 import NextAuth from "next-auth";
  
