@@ -8,11 +8,23 @@ import React from 'react'
 
 export default async function page() {
   const fetchedProducts = await fetchAllProducts()
-  // console.log(fetchedProducts, "Products Have Arrived😒😒😒");
+  if(!fetchAllProducts) {
+    return (
+      <div className="">No Products Available...!!!</div>
+    )
+  }
   const fetchedNews = await fetchAllNews()
-  // This is our simple object with all the information
+  if(!fetchedNews) {
+    return (
+      <div className="">No News Available...!!!</div>
+    )
+  }
   const fetchedCategories = await fetchAllCategories()
-  // console.log(fetchedCategories, "Categories Have Arrived😒😒😒");
+  if(!fetchedCategories) {
+    return (
+      <div className="">No Categories Available...!!!</div>
+    )
+  }
 const heroData = {
   title: "Capital Markets Day 2025",
   description:
